@@ -1,0 +1,15 @@
+{
+    "name": "default",
+    "type": "mysql",
+    "host": "puns-db",
+    "port": 3306,
+    "username": "root",
+    "password": "zaq1@WSX",
+    "database": "puns",
+    "migrationsDir": ["migrations"],
+    "entities": ["src/entities/**/*.ts"],
+    "migrations": ["migrations/**/*.ts"],
+    "cli": {
+        "migrationsDir": "migrations"
+    }
+ }

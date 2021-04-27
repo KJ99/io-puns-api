@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+    db:
+        image: mysql:5.7
+        container_name: puns-db
+        restart: unless-stopped
+        environment:
+            - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASS}
+            - MYSQL_DATABASE=${DATABASE_NAME}
+        ports:
+        - "3416:3306"
+    api:
+        build:
+            context: ./docker/api
+        container_name: puns-api
+        command: tail -F anything
+        volumes:
+            - '.:/usr/src/puns'
+        ports: 
+            - 3000:3000

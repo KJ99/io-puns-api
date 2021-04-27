@@ -1,0 +1,30 @@
+import * as dotenv from 'dotenv'
+dotenv.config({ path: '.env.app' })
+console.log(process.env.SOME)
+import { getConnectionOptions, createConnection, Connection } from 'typeorm'
+import { getManager } from "typeorm";
+import Category from './entities/category';
+
+getConnectionOptions('default')
+.then(opt => {
+    return createConnection(opt)
+})
+.then((conn: Connection) => {
+    let manager = conn.createEntityManager()
+    
+    const cat = new Category()
+    cat.name = 'Przez apke'
+    cat.active = true
+    
+    return manager.save(cat)  
+})
+.then(data => console.log(data))
+.catch(e => console.error(e))
+
+declare global {
+}
+
+// createConnection()
+// const x = getConnectionManager().get('default')
+
+// console.log(x)
