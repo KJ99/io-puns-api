@@ -1,6 +1,12 @@
 version: '3'
 
 services:
+    mongo:
+        container_name: puns-mongo
+        image: mongo
+        restart: always
+        ports: 
+            - 2000:27017
     db:
         image: mysql:5.7
         container_name: puns-db
@@ -19,3 +25,4 @@ services:
             - '.:/usr/src/puns'
         ports: 
             - 3000:3000
+            - 3999:3999

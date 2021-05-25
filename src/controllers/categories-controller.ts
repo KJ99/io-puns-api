@@ -111,4 +111,25 @@ app.get('/:id', (req, res) => {
     })
 })
 
+app.delete('/:id', (req, res) => {
+    const categoryService = new CategoryService()
+    categoryService.delete(parseInt(req.params.id))
+    .then(() => {
+        res.sendStatus(204)
+    })
+    .catch(e => {
+        if(e instanceof HttpError) {
+            res.status(e.statusCode)
+            if(e.error != null) {
+                res.json(caseConverter.convert(Naming.CamelCase, Naming.SneakCase, e.error))
+            } else {
+                res.end()
+            }
+        } else {
+            console.log(e)
+            res.sendStatus(500)
+        }
+    })
+})
+
 export default app
